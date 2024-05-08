@@ -11,8 +11,9 @@ import (
 )
 
 func createRandomAccount(t *testing.T) Account {
+	user := createRandomUser(t)
 	arg := CreateAccountParams{
-		Owner:    util.RandomOwner(),
+		Owner:    user.Username,
 		Balance:  100,
 		Currency: util.RandomCurrency(),
 	}
@@ -47,14 +48,12 @@ func TestGetAccount(t *testing.T) {
 	require.Equal(t, account1.Balance, account2.Balance)
 	require.Equal(t, account1.Currency, account2.Currency)
 
-	// require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
+	require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
 
-	if account1.CreatedAt.Valid && account2.CreatedAt.Valid {
-		require.WithinDuration(t, account1.CreatedAt.Time, account2.CreatedAt.Time, time.Second)
-	} else {
-		// Handle the case when either account1.CreatedAt or account2.CreatedAt is null
-		require.Fail(t, "One or both CreatedAt values are null")
-	}
+	// if account1.CreatedAt.Valid && account2.CreatedAt.Valid {
+	// 	require.WithinDuration(t, account1.CreatedAt.Time, account2.CreatedAt.Time, time.Second)
+	// } else {
+	// 	require.Fail(t, "One or both CreatedAt values are null")
 }
 
 func TestUpdateAccount(t *testing.T) {
@@ -75,14 +74,12 @@ func TestUpdateAccount(t *testing.T) {
 	require.Equal(t, arg.Balance, account2.Balance)
 	require.Equal(t, account1.Currency, account2.Currency)
 
-	// require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
+	require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
 
-	if account1.CreatedAt.Valid && account2.CreatedAt.Valid {
-		require.WithinDuration(t, account1.CreatedAt.Time, account2.CreatedAt.Time, time.Second)
-	} else {
-		// Handle the case when either account1.CreatedAt or account2.CreatedAt is null
-		require.Fail(t, "One or both CreatedAt values are null")
-	}
+	// if account1.CreatedAt.Valid && account2.CreatedAt.Valid {
+	// 	require.WithinDuration(t, account1.CreatedAt.Time, account2.CreatedAt.Time, time.Second)
+	// } else {
+	// 	require.Fail(t, "One or both CreatedAt values are null")
 }
 
 func TestDeleteAccount(t *testing.T) {
